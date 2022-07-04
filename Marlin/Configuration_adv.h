@@ -1037,7 +1037,7 @@
  * Set DISABLE_INACTIVE_? 'true' to shut down axis steppers after an idle period.
  * The Deactive Time can be overridden with M18 and M84. Set to 0 for No Timeout.
  */
-#define DEFAULT_STEPPER_DEACTIVE_TIME 5
+#define DEFAULT_STEPPER_DEACTIVE_TIME 10
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
 #define DISABLE_INACTIVE_Z true  // Set 'false' if the nozzle could fall onto your printed part!
@@ -2035,10 +2035,10 @@
  * the probe to be unable to reach any points.
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
-  #define PROBING_MARGIN_LEFT 0
-  #define PROBING_MARGIN_RIGHT 3  //3
-  #define PROBING_MARGIN_FRONT 0
-  #define PROBING_MARGIN_BACK 8  //8
+  #define PROBING_MARGIN_LEFT 0   //0
+  #define PROBING_MARGIN_RIGHT 24  //15
+  #define PROBING_MARGIN_FRONT 8   //7
+  #define PROBING_MARGIN_BACK 0  //2
 #endif
 
 #if EITHER(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)
@@ -2057,7 +2057,7 @@
  * Repeatedly attempt G29 leveling until it succeeds.
  * Stop after G29_MAX_RETRIES attempts.
  */
-//#define G29_RETRY_AND_RECOVER
+#define G29_RETRY_AND_RECOVER
 #if ENABLED(G29_RETRY_AND_RECOVER)
   #define G29_MAX_RETRIES 3
   #define G29_HALT_ON_FAILURE
@@ -2509,7 +2509,7 @@
                                                   //   Set to 0 for manual extrusion.
                                                   //   Filament can be extruded repeatedly from the Filament Change menu
                                                   //   until extrusion is consistent, and to purge old filament.
-  #define ADVANCED_PAUSE_RESUME_PRIME          0  // (mm) Extra distance to prime nozzle after returning from park.
+  //#define ADVANCED_PAUSE_RESUME_PRIME          0  // (mm) Extra distance to prime nozzle after returning from park.
   //#define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
@@ -2525,7 +2525,7 @@
   //#define PAUSE_REHEAT_FAST_RESUME              // Reduce number of waits by not prompting again post-timeout before continuing.
 
   #define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
-  #define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
+  //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
   #define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
@@ -2686,8 +2686,8 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC(X)
-    #define X_CURRENT       500        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  230        // (mA) RMS current for sensorless homing
+    #define X_CURRENT       550        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT_HOME  350        // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.22
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2707,9 +2707,9 @@
 
   #if AXIS_IS_TMC(Y)
     //#define Y_CURRENT       348
-    #define Y_CURRENT       500 // custom
+    #define Y_CURRENT       550 // custom
     //#define Y_CURRENT_HOME  182
-    #define Y_CURRENT_HOME  260  // custom
+    #define Y_CURRENT_HOME  350  // custom
     #define Y_MICROSTEPS     16
     #define Y_RSENSE       0.22
     #define Y_CHAIN_POS      -1
@@ -2728,8 +2728,8 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT       530
-    #define Z_CURRENT_HOME  348
+    #define Z_CURRENT       870
+    #define Z_CURRENT_HOME  870
     #define Z_MICROSTEPS     16
     #define Z_RSENSE       0.22
     #define Z_CHAIN_POS      -1
